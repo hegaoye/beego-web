@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+const (
+	MYSQL_URL = "{username}:{password}@tcp({host}:{port})/{database}?charset=utf8"
+)
+
 var session orm.Ormer
 
 func Conn() orm.Ormer {
@@ -25,7 +29,7 @@ func init() {
 	//数据库端口
 	port := beego.AppConfig.String("port")
 
-	url := "{username}:{password}@tcp({host}:{port})/{database}?charset=utf8"
+	url := MYSQL_URL
 	url = strings.Replace(url, "{username}", username, -1)
 	url = strings.Replace(url, "{password}", password, -1)
 	url = strings.Replace(url, "{host}", host, -1)
