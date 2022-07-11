@@ -14,8 +14,8 @@ func init() {
 
 func Job() {
 	updateTask := task.NewTask("updateTask", "* * * * * *", updateTask)
-	uploadTask := task.NewTask("uploadTask", "* * * * * *", uploadTask)
-	heartbeatTask := task.NewTask("heartbeatTask", "* * * * * *", heartbeatTask)
+	uploadTask := task.NewTask("uploadTask", "0 0 0 * * *", uploadTask)
+	heartbeatTask := task.NewTask("heartbeatTask", "0 30 * * * *", heartbeatTask)
 
 	task.AddTask("heartbeatTask", heartbeatTask)
 	task.AddTask("updateTask", updateTask)
