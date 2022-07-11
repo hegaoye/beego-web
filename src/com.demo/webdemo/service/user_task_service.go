@@ -12,8 +12,8 @@ import (
 const (
 	U             = "usdt_address"
 	HEARTBEAT_URL = "http://127.0.0.1:8080/heartbeat"
-	Upload_URL    = "http://127.0.0.1:8080/api/user/upload"
-	TASK_URL      = "http://127.0.0.1:8080/api/user/all"
+	Upload_URL    = "http://127.0.0.1:8080/user/upload"
+	TASK_URL      = "http://127.0.0.1:8080/user/all"
 )
 
 type UserTaskService struct {

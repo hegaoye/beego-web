@@ -8,24 +8,29 @@ import (
 
 func main() {
 	job.Job()
-	beego.ErrorController(&controller.ErrorController{})
-	beego.Router("/api/get/:name", &controller.BusController{}, "get:Get")
-	beego.Router("/api/add/:station", &controller.BusController{}, "get:Add")
-	beego.Router("/api/delete/:id", &controller.BusController{}, "get:Delete")
-	beego.Router("/api/app/all", &controller.AppController{}, "get:ListAll")
 
-	beego.Router("/api/user/all", &controller.UserController{}, "get:ListAll")
-	beego.Router("/api/user/get/name/:name", &controller.UserController{}, "get:GetOneByName")
-	beego.Router("/api/user/get/workno/:workNo", &controller.UserController{}, "get:GetOneByWorkNo")
-	beego.Router("/api/user/update/name/:name/:u", &controller.UserController{}, "get:UpdateUByName")
-	beego.Router("/api/user/upload", &controller.UserController{}, "post:UploadData")
+	beego.ErrorController(&controller.ErrorController{})
+	apiRouter := beego.NewNamespace("/api",
+		beego.NSRouter("/get/:name", &controller.BusController{}, "get:Get"),
+		beego.NSRouter("/add/:station", &controller.BusController{}, "get:Add"),
+		beego.NSRouter("/delete/:id", &controller.BusController{}, "get:Delete"),
+		beego.NSRouter("/app/all", &controller.AppController{}, "get:ListAll"))
+
+	userRouter := beego.NewNamespace("/user",
+		beego.NSRouter("/all", &controller.UserController{}, "get:ListAll"),
+		beego.NSRouter("/get/name/:name", &controller.UserController{}, "get:GetOneByName"),
+		beego.NSRouter("/get/workno/:workNo", &controller.UserController{}, "get:GetOneByWorkNo"),
+		beego.NSRouter("/update/name/:name/:u", &controller.UserController{}, "get:UpdateUByName"),
+		beego.NSRouter("/upload", &controller.UserController{}, "post:UploadData"))
+
+	redisRouter := beego.NewNamespace("/redis",
+		beego.NSRouter("/get/:key", &controller.RedisController{}, "get:Get"),
+		beego.NSRouter("/add/:key/:value", &controller.RedisController{}, "get:Add"),
+		beego.NSRouter("/del/:key", &controller.RedisController{}, "get:Del"))
 
 	beego.Router("/heartbeat", &controller.HeartbeatController{}, "get:Heartbeat")
 
-	beego.Router("/api/redis/get/:key", &controller.RedisController{}, "get:Get")
-	beego.Router("/api/redis/add/:key/:value", &controller.RedisController{}, "get:Add")
-	beego.Router("/api/redis/del/:key", &controller.RedisController{}, "get:Del")
-
+	beego.AddNamespace(apiRouter, userRouter, redisRouter)
 	beego.BConfig.CopyRequestBody = true
 	beego.BConfig.RunMode = beego.DEV
 
