@@ -23,6 +23,6 @@ func main() {
 	beego.AddNamespace(userRouter)
 	beego.BConfig.CopyRequestBody = true
 	beego.BConfig.RunMode = beego.DEV
-	beego.BConfig.Listen.HTTPPort = 8081
+	beego.BConfig.Listen.HTTPPort = 8888
 	beego.Run()
 }
