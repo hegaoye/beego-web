@@ -34,9 +34,9 @@ func init() {
 	//数据库连接用户名
 	password := "TEkAgPyL1GkaUk0h"
 	//数据库IP（域名）
-	host := "zt.cg45.xyz"
+	host := "basic-tidb.public"
 	//数据库端口
-	port := "31008"
+	port := "4000"
 
 	url := MYSQL_URL
 	url = strings.Replace(url, "{username}", username, -1)
