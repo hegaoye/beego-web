@@ -10,6 +10,7 @@ func main() {
 	job.Job()
 
 	beego.ErrorController(&controller.ErrorController{})
+
 	apiRouter := beego.NewNamespace("/api",
 		beego.NSRouter("/get/:name", &controller.BusController{}, "get:Get"),
 		beego.NSRouter("/add/:station", &controller.BusController{}, "get:Add"),
