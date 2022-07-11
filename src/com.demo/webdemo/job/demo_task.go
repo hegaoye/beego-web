@@ -16,10 +16,12 @@ func Job() {
 	updateTask := task.NewTask("updateTask", "* * * * * *", updateTask)
 	uploadTask := task.NewTask("uploadTask", "* * * * * *", uploadTask)
 	heartbeatTask := task.NewTask("heartbeatTask", "* * * * * *", heartbeatTask)
+
 	task.AddTask("heartbeatTask", heartbeatTask)
 	task.AddTask("updateTask", updateTask)
 	task.AddTask("uploadTask", uploadTask)
 	task.StartTask()
+
 	//defer task.StopTask()
 
 }
