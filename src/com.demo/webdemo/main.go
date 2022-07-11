@@ -3,7 +3,7 @@ package main
 import (
 	"com.demo/webdemo/controller"
 	"com.demo/webdemo/job"
-	beego "github.com/beego/beego/adapter"
+	beego "github.com/beego/beego/v2/adapter"
 )
 
 func main() {
