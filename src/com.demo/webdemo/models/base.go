@@ -1,7 +1,6 @@
 package models
 
 import (
-	beego "github.com/beego/beego/adapter"
 	"github.com/beego/beego/client/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"strings"
@@ -17,17 +16,27 @@ func Conn() orm.Ormer {
 	return session
 }
 
+/*
+*
+database = payment_dev
+username = payment_dev
+password = TEkAgPyL1GkaUk0h
+host = zt.cg45.xyz
+port = 31008
+*/
 func init() {
 	//数据库名称
-	database := beego.AppConfig.String("database")
+	database := "payment_dev"
+	//database := beego.AppConfig.String("database")
 	//数据库连接用户名
-	username := beego.AppConfig.String("username")
+	username := "payment_dev"
+	//username := beego.AppConfig.String("username")
 	//数据库连接用户名
-	password := beego.AppConfig.String("password")
+	password := "TEkAgPyL1GkaUk0h"
 	//数据库IP（域名）
-	host := beego.AppConfig.String("host")
+	host := "zt.cg45.xyz"
 	//数据库端口
-	port := beego.AppConfig.String("port")
+	port := "31008"
 
 	url := MYSQL_URL
 	url = strings.Replace(url, "{username}", username, -1)
