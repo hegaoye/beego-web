@@ -1,7 +1,5 @@
 package models
 
-import "github.com/beego/beego/client/orm"
-
 type App struct {
 	Id         string
 	Name       string
@@ -9,6 +7,6 @@ type App struct {
 	Summary    string
 }
 
-func init() {
-	orm.RegisterModel(new(App))
-}
+//func init() {
+//	orm.RegisterModel(new(App))
+//}

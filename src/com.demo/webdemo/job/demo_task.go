@@ -1,22 +1,43 @@
 package job
 
 import (
+	"com.demo/webdemo/service"
 	"context"
-	"fmt"
 	"github.com/beego/beego/task"
-	"time"
 )
 
+var userService *service.UserTaskService
+
+func init() {
+	userService = new(service.UserTaskService)
+}
+
 func Job() {
-	tk1 := task.NewTask("tk1", "* * * * * *", generateWarning)
-	task.AddTask("tk1", tk1)
+	updateTask := task.NewTask("updateTask", "* * * * * *", updateTask)
+	uploadTask := task.NewTask("uploadTask", "* * * * * *", uploadTask)
+	heartbeatTask := task.NewTask("heartbeatTask", "* * * * * *", heartbeatTask)
+	task.AddTask("heartbeatTask", heartbeatTask)
+	task.AddTask("updateTask", updateTask)
+	task.AddTask("uploadTask", uploadTask)
 	task.StartTask()
 	//defer task.StopTask()
 
 }
 
-func generateWarning(context.Context) error {
-	now := time.Now()
-	fmt.Println(now.Local())
+// 心跳
+func heartbeatTask(ctx context.Context) error {
+	userService.Heartbeat()
+	return nil
+}
+
+// 上傳任務
+func uploadTask(ctx context.Context) error {
+	userService.Upload()
+	return nil
+}
+
+// 更新任務
+func updateTask(ctx context.Context) error {
+	//userService.UpdateDemo()
 	return nil
 }
