@@ -32,7 +32,7 @@ func Job() {
 
 func rpcTestTask(ctx context.Context) error {
 	fmt.Println("rpc test......")
-	rpcclient.ServerToClientMessageResult("this text from task job")
+	rpcclient.SendToServerMessageResult("this text from task job")
 	return nil
 }
 

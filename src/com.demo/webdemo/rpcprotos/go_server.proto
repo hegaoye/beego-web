@@ -27,6 +27,7 @@ message LoginParam {
 message ServerToClientMsgResultParam {
   int32 code = 1;
   int32 msgId = 2;
+  string content = 3;
 }
 
 message GoBaseResult {

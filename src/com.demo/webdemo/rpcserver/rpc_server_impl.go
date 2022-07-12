@@ -11,7 +11,6 @@ type GoRpcServerInterfaceServerImpl struct {
 }
 
 func (*GoRpcServerInterfaceServerImpl) IMLogin(ctx context.Context, req *rpcprotos.LoginParam) (*rpcprotos.GoBaseResult, error) {
-
 	account := req.Account
 	fmt.Println("IM登录，用户名：" + account)
 	return &rpcprotos.GoBaseResult{
@@ -23,7 +22,7 @@ func (*GoRpcServerInterfaceServerImpl) IMLogin(ctx context.Context, req *rpcprot
 
 func (*GoRpcServerInterfaceServerImpl) ServerToClientMessageResult(ctx context.Context,
 	req *rpcprotos.ServerToClientMsgResultParam) (*rpcprotos.GoBaseResult, error) {
-	fmt.Printf("收到來自客戶端消息 ： ", req.String())
+	fmt.Println("收到來自客戶端消息 ： ", req.String())
 	return &rpcprotos.GoBaseResult{
 		Code:    200,
 		Message: "OK",

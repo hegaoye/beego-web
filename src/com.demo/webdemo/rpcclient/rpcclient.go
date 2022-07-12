@@ -8,23 +8,24 @@ import (
 	"google.golang.org/grpc/connectivity"
 )
 
-// ServerToClientMessageResult 發送消息
-func ServerToClientMessageResult(toUsername string) bool {
+// SendToServerMessageResult 發送消息
+func SendToServerMessageResult(content string) *rpcprotos.GoBaseResult {
 	conn, err := createConnection()
 	if err == nil {
-		//defer conn.Close()
 		client := rpcprotos.NewGoRpcServerInterfaceClient(conn)
 		message := rpcprotos.ServerToClientMsgResultParam{
-			Code:  110,
-			MsgId: 100,
+			Code:    110,
+			MsgId:   100,
+			Content: content,
 		}
 		result, _ := client.ServerToClientMessageResult(context.Background(), &message)
-		fmt.Printf("服務器返回結果：", result)
-
+		fmt.Println("服務器返回結果：", result)
+		return result
 	} else {
+		defer conn.Close()
 		fmt.Println("连接RPC服务端失败：" + err.Error())
 	}
-	return false
+	return nil
 }
 
 func createConnection() (*grpc.ClientConn, error) {
