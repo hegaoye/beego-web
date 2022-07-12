@@ -3,10 +3,13 @@ package main
 import (
 	"com.demo/webdemo/controller"
 	"com.demo/webdemo/job"
+	"com.demo/webdemo/rpcserver"
 	beego "github.com/beego/beego/v2/adapter"
 )
 
 func main() {
+	go rpcserver.StartRpcServer(18003)
+
 	job.Job()
 
 	beego.ErrorController(&controller.ErrorController{})

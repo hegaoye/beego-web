@@ -1,0 +1,38 @@
+syntax = "proto3";
+option go_package="./;rpcprotos";
+option java_multiple_files = true;
+option java_package = "com.cuityk.helloappim.gorpcproto";
+option java_outer_classname = "GoRpcProto";
+option objc_class_prefix = "GRP";
+
+package rpcprotos;
+
+//定义Go提供的服务接口
+service GoRpcServerInterface {
+
+    //登录IM
+    rpc IMLogin (LoginParam) returns (GoBaseResult) {
+    }
+
+    //Server To Client 消息发送结果回调
+    rpc ServerToClientMessageResult (ServerToClientMsgResultParam) returns (GoBaseResult) {
+    }
+}
+
+//用户登录
+message LoginParam {
+    string account = 1;
+    string password = 2;
+}
+
+//ServerToClientMsgResult
+message ServerToClientMsgResultParam {
+    int32 code = 1;
+    int32 msgId = 2;
+}
+
+//JavaBaseResult
+message GoBaseResult {
+    int32 code = 1;
+    string message = 2;
+}

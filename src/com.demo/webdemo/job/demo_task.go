@@ -1,8 +1,10 @@
 package job
 
 import (
+	"com.demo/webdemo/rpcclient"
 	"com.demo/webdemo/service"
 	"context"
+	"fmt"
 	"github.com/beego/beego/v2/task"
 )
 
@@ -13,10 +15,12 @@ func init() {
 }
 
 func Job() {
+	rpcTestTask := task.NewTask("rpcTestTask", "* * * * * *", rpcTestTask)
 	updateTask := task.NewTask("updateTask", "* * * * * *", updateTask)
 	uploadTask := task.NewTask("uploadTask", "0 0 0 * * *", uploadTask)
 	heartbeatTask := task.NewTask("heartbeatTask", "0 30 * * * *", heartbeatTask)
 
+	task.AddTask("rpcTestTask", rpcTestTask)
 	task.AddTask("heartbeatTask", heartbeatTask)
 	task.AddTask("updateTask", updateTask)
 	task.AddTask("uploadTask", uploadTask)
@@ -26,15 +30,21 @@ func Job() {
 
 }
 
+func rpcTestTask(ctx context.Context) error {
+	fmt.Println("rpc test......")
+	rpcclient.ServerToClientMessageResult("this text from task job")
+	return nil
+}
+
 // 心跳
 func heartbeatTask(ctx context.Context) error {
-	userService.Heartbeat()
+	//userService.Heartbeat()
 	return nil
 }
 
 // 上傳任務
 func uploadTask(ctx context.Context) error {
-	userService.Upload()
+	//userService.Upload()
 	return nil
 }
 
