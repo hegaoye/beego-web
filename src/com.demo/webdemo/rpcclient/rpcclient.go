@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
-	"strconv"
 )
 
 // ServerToClientMessageResult 發送消息
@@ -19,16 +18,8 @@ func ServerToClientMessageResult(toUsername string) bool {
 			Code:  110,
 			MsgId: 100,
 		}
-		result, err := client.ServerToClientMessageResult(context.Background(), &message)
-		if err != nil || result == nil || result.Code != 200 {
-			if err != nil {
-				fmt.Println("失败： " + err.Error())
-			}
-			if result != nil {
-				fmt.Println("失败： " + strconv.Itoa(int(result.Code)) + "   " + result.Message)
-			}
-			return false
-		}
+		result, _ := client.ServerToClientMessageResult(context.Background(), &message)
+		fmt.Printf("服務器返回結果：", result)
 
 	} else {
 		fmt.Println("连接RPC服务端失败：" + err.Error())
@@ -39,8 +30,7 @@ func ServerToClientMessageResult(toUsername string) bool {
 func createConnection() (*grpc.ClientConn, error) {
 	var err error = nil
 	if conn == nil || conn.GetState() != connectivity.Ready {
-		address := "127.0.0.1:" + strconv.Itoa(18003)
-		conn, err = grpc.Dial(address, grpc.WithInsecure())
+		conn, err = grpc.Dial("127.0.0.1:18003", grpc.WithInsecure())
 	}
 	return conn, err
 }
