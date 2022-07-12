@@ -9,9 +9,7 @@ import (
 	"strconv"
 )
 
-/**
-发送消息
-*/
+// ServerToClientMessageResult 發送消息
 func ServerToClientMessageResult(toUsername string) bool {
 	conn, err := createConnection()
 	if err == nil {
@@ -38,7 +36,6 @@ func ServerToClientMessageResult(toUsername string) bool {
 	return false
 }
 
-//连接JavaRPC服务器
 func createConnection() (*grpc.ClientConn, error) {
 	var err error = nil
 	if conn == nil || conn.GetState() != connectivity.Ready {
@@ -51,7 +48,7 @@ func createConnection() (*grpc.ClientConn, error) {
 //rpc连接
 var conn *grpc.ClientConn
 
-//消息模型
+// MessageModel 消息模型
 type MessageModel struct {
 	MsgId      int    `json:"msgId"`      //消息Id
 	Type       int8   `json:"type"`       //消息类型

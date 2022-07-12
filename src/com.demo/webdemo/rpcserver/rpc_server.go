@@ -8,9 +8,7 @@ import (
 	"net"
 )
 
-/**
-初始化RPC服务
-*/
+// StartRpcServer 啟動server
 func StartRpcServer(port int16) {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
