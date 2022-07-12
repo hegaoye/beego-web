@@ -3,9 +3,9 @@ package service
 import (
 	"com.demo/webdemo/models"
 	"fmt"
-	"github.com/beego/beego/client/httplib"
-	"github.com/beego/beego/client/orm"
-	"github.com/beego/beego/core/logs"
+	"github.com/beego/beego/v2/client/httplib"
+	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 	"time"
 )
 

@@ -1,8 +1,8 @@
 package models
 
 import (
-	beego "github.com/beego/beego/adapter"
-	"github.com/beego/beego/client/orm"
+	beego "github.com/beego/beego/v2/adapter"
+	"github.com/beego/beego/v2/client/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"strings"
 )

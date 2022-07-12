@@ -3,8 +3,8 @@ package controller
 import (
 	"com.demo/webdemo/models"
 	"com.demo/webdemo/service"
-	"github.com/beego/beego/core/logs"
-	"github.com/beego/beego/server/web"
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/beego/beego/v2/server/web"
 )
 
 type AppController struct {

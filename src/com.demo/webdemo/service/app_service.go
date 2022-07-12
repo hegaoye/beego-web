@@ -3,7 +3,7 @@ package service
 import (
 	"com.demo/webdemo/models"
 	"fmt"
-	"github.com/beego/beego/client/orm"
+	"github.com/beego/beego/v2/client/orm"
 )
 
 type AppService struct {

@@ -3,7 +3,7 @@ package job
 import (
 	"com.demo/webdemo/service"
 	"context"
-	"github.com/beego/beego/task"
+	"github.com/beego/beego/v2/task"
 )
 
 var userService *service.UserTaskService

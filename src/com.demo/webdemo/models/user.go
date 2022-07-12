@@ -1,6 +1,6 @@
 package models
 
-import "github.com/beego/beego/client/orm"
+import "github.com/beego/beego/v2/client/orm"
 
 //`id` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id',
 //`work_no` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '工号',

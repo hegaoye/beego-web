@@ -1,13 +1,15 @@
 package models
 
 import (
-	beego "github.com/beego/beego/adapter"
-	"github.com/beego/beego/core/logs"
-	"gopkg.in/redis.v5"
+	"context"
+	beego "github.com/beego/beego/v2/adapter"
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/go-redis/redis/v9"
 	"time"
 )
 
 var redisCache *redis.Client
+var ctx = context.Background()
 
 func init() {
 	server := beego.AppConfig.String("cache::server")
@@ -17,8 +19,15 @@ func init() {
 }
 
 func createClient(server string, password string, db int) *redis.Client {
-	client := redis.NewClient(&redis.Options{Addr: server, Password: password, DB: db})
-	_, error := client.Ping().Result()
+	redisOptions := redis.Options{
+		Addr:     server,
+		Password: password,
+		DB:       db,
+	}
+
+	client := redis.NewClient(&redisOptions)
+
+	_, error := client.Ping(ctx).Result()
 	if error != nil {
 		logs.Error("连接redis失败", error)
 	}
@@ -26,7 +35,7 @@ func createClient(server string, password string, db int) *redis.Client {
 }
 
 func SetStr(key, value string, time time.Duration) (err error) {
-	err = redisCache.Set(key, value, time).Err()
+	err = redisCache.Set(ctx, key, value, time).Err()
 	if err != nil {
 		logs.Error("set key:", key, ",value:", value, err)
 	}
@@ -34,11 +43,11 @@ func SetStr(key, value string, time time.Duration) (err error) {
 }
 
 func GetKey(key string) (value string) {
-	v, _ := redisCache.Get(key).Result()
+	v, _ := redisCache.Get(ctx, key).Result()
 	return v
 }
 
 func DelKey(key string) (err error) {
-	err = redisCache.Del(key).Err()
+	err = redisCache.Del(ctx, key).Err()
 	return
 }

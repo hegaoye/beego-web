@@ -2,8 +2,8 @@ package controller
 
 import (
 	"com.demo/webdemo/models"
-	beego "github.com/beego/beego/adapter"
-	"github.com/beego/beego/core/logs"
+	beego "github.com/beego/beego/v2/adapter"
+	"github.com/beego/beego/v2/core/logs"
 	"time"
 )
 

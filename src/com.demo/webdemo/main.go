@@ -3,7 +3,7 @@ package main
 import (
 	"com.demo/webdemo/controller"
 	"com.demo/webdemo/job"
-	beego "github.com/beego/beego/adapter"
+	beego "github.com/beego/beego/v2/adapter"
 )
 
 func main() {
@@ -32,8 +32,10 @@ func main() {
 	beego.Router("/heartbeat", &controller.HeartbeatController{}, "get:Heartbeat")
 
 	beego.AddNamespace(apiRouter, userRouter, redisRouter)
+
 	beego.BConfig.CopyRequestBody = true
 	beego.BConfig.RunMode = beego.DEV
+	beego.BConfig.Listen.HTTPPort = 8080
 
 	beego.Run()
 }
