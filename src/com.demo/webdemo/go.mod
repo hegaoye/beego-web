@@ -8,9 +8,6 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	gorm.io/driver/sqlite v1.3.6
 	gorm.io/gorm v1.23.8
-)
-
-require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
