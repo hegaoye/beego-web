@@ -8,6 +8,8 @@ import (
 type UserService struct {
 }
 
+const TableName = "staff"
+
 func (this UserService) ListAll() []models.Staff {
 	var appList []models.Staff
 
@@ -27,7 +29,7 @@ func (this UserService) ListAll() []models.Staff {
 func (this UserService) GetOneByName(name string) models.Staff {
 	var user models.Staff
 	_, err := models.Conn().
-		QueryTable("staff").
+		QueryTable(TableName).
 		Filter("name", name).
 		All(&user)
 
@@ -43,7 +45,7 @@ func (this UserService) GetOneByName(name string) models.Staff {
 func (this UserService) GetOneByWorkNo(workNo string) models.Staff {
 	var user models.Staff
 	_, err := models.Conn().
-		QueryTable("staff").
+		QueryTable(TableName).
 		Filter("work_no", workNo).
 		All(&user)
 
@@ -58,7 +60,7 @@ func (this UserService) GetOneByWorkNo(workNo string) models.Staff {
 
 func (this UserService) UpdateUByName(name string, u string) models.Staff {
 	num, err := models.Conn().
-		QueryTable("staff").
+		QueryTable(TableName).
 		Filter("name", name).
 		Update(orm.Params{
 			U: u,
@@ -67,7 +69,7 @@ func (this UserService) UpdateUByName(name string, u string) models.Staff {
 	var user models.Staff
 	if num > 0 {
 		_, err = models.Conn().
-			QueryTable("staff").
+			QueryTable(TableName).
 			Filter("name", name).
 			All(&user)
 
