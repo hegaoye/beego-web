@@ -5,29 +5,39 @@ import (
 	"com.demo/webdemo/service"
 	"context"
 	"fmt"
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/task"
 )
 
 var userService *service.UserTaskService
+var trendService *service.TrendService
 
 func init() {
 	userService = new(service.UserTaskService)
+	trendService = new(service.TrendService)
 }
 
 func Job() {
-	rpcTestTask := task.NewTask("rpcTestTask", "* * * * * *", rpcTestTask)
+	getCountTask := task.NewTask("getCountTask", "* * * * * *", getCountTask)
+	//rpcTestTask := task.NewTask("rpcTestTask", "* * * * * *", rpcTestTask)
 	updateTask := task.NewTask("updateTask", "* * * * * *", updateTask)
 	uploadTask := task.NewTask("uploadTask", "0 0 0 * * *", uploadTask)
 	heartbeatTask := task.NewTask("heartbeatTask", "0 30 * * * *", heartbeatTask)
 
-	task.AddTask("rpcTestTask", rpcTestTask)
+	//task.AddTask("rpcTestTask", rpcTestTask)
 	task.AddTask("heartbeatTask", heartbeatTask)
 	task.AddTask("updateTask", updateTask)
 	task.AddTask("uploadTask", uploadTask)
+	task.AddTask("getCountTask", getCountTask)
 	task.StartTask()
 
 	//defer task.StopTask()
 
+}
+
+func getCountTask(ctx context.Context) error {
+	logs.Debug(trendService.GetCount())
+	return nil
 }
 
 func rpcTestTask(ctx context.Context) error {

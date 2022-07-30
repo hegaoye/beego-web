@@ -2,6 +2,7 @@ package main
 
 import (
 	"com.demo/webdemo/controller"
+	"com.demo/webdemo/job"
 	"com.demo/webdemo/rpcserver"
 	beego "github.com/beego/beego/v2/adapter"
 )
@@ -9,7 +10,7 @@ import (
 func main() {
 	go rpcserver.StartRpcServer(18003)
 
-	//job.Job()
+	job.Job()
 
 	beego.ErrorController(&controller.ErrorController{})
 
@@ -33,12 +34,13 @@ func main() {
 
 	beego.Router("/heartbeat", &controller.HeartbeatController{}, "get:Heartbeat")
 	beego.Router("/rpc/:data", &controller.GrpcTestController{}, "get:SendMsg")
+	beego.Router("/bot/get", &controller.BotApiClient{}, "get:Get")
 
 	beego.AddNamespace(apiRouter, userRouter, redisRouter)
 
 	beego.BConfig.CopyRequestBody = true
 	beego.BConfig.RunMode = beego.DEV
-	beego.BConfig.Listen.HTTPPort = 8080
+	beego.BConfig.Listen.HTTPPort = 8088
 
 	beego.Run()
 }
